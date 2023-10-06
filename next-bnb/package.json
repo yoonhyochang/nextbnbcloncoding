@@ -1,0 +1,8 @@
+{
+  "name": "next-bnb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/yoonhyochang/nextbnbcloncoding.git",
+  "author": "gptus <yhc9308@naver.com>",
+  "license": "MIT"
+}
