@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // TypeScript 컴파일러가 사용할 라이브러리를 지정합니다.
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // JavaScript 파일을 TypeScript처럼 처리할 것인지 여부를 설정합니다.
+    "allowJs": true,
+    // 라이브러리 파일에 대한 타입 검사를 스킵할 것인지 여부를 설정합니다.
+    "skipLibCheck": true,
+    // 엄격한 타입 검사를 활성화합니다.
+    "strict": true,
+    // 컴파일 결과물을 생성하지 않고 컴파일만 수행할 것인지 여부를 설정합니다.
+    "noEmit": true,
+    // 증분 컴파일을 활성화합니다.
+    "incremental": true,
+    // ES 모듈과 CommonJS 모듈 간의 상호 운용성을 허용합니다.
+    "esModuleInterop": true,
+    // 모듈 시스템을 지정합니다. ESNext로 설정되어 있으므로 ES6의 모듈 시스템을 사용합니다.
+    "module": "esnext",
+    // 모듈 해결 전략을 지정합니다. Node.js 스타일로 설정되어 있으므로 Node.js와 유사한 모듈 해결 방식을 사용합니다.
+    "moduleResolution": "node",
+    // JSON 모듈을 해결하기 위해 resolveJsonModule을 활성화합니다.
+    "resolveJsonModule": true,
+    // 각 파일을 독립적인 모듈로 다룰 것인지 여부를 설정합니다.
+    "isolatedModules": true,
+    // JSX 코드를 어떻게 처리할 것인지를 지정합니다. "preserve"로 설정되어 있으므로 JSX 코드를 변환하지 않고 원래 상태로 유지합니다.
+    "jsx": "preserve"
+  },
+  // 컴파일할 파일을 지정합니다.
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  // 컴파일에서 제외할 디렉토리를 지정합니다. "node_modules" 폴더를 제외하고 컴파일하지 않습니다.
+  "exclude": ["node_modules"]
+}
