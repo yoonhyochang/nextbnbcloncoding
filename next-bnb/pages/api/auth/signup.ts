@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
+import Data from "../../../lib/data";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   //* api 순서도
   //1.api methof post 인지확인
@@ -11,10 +11,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.send("필수 데이터가 없습니다.");
     }
     // return res.send("필수 데이터가 없습니다.");
-  }
-  res.statusCode = 405;
 
-  return res.end();
+    //3.email 중복확인
+    const userExist = Data.user.exist({ email });
+    if (userExist) {
+      res.statusCode = 409;
+      res.send("이미 가입된 이메일 입니다.");
+    }
+    res.statusCode = 405;
+
+    return res.end();
+  }
 };
 
-//남은 건 3.email 중복확인, 4.패스워드 암호화, 5. 유저 정보를 추가, 6.추가된 유저의 정보와 token을 전달합니다.
+//남은 건 , 4.패스워드 암호화, 5. 유저 정보를 추가, 6.추가된 유저의 정보와 token을 전달합니다.
