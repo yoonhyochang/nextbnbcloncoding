@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Data from "../../../lib/data";
 import bcrypt from "bcryptjs";
 import { StoredUserType } from "../../../types/user";
+import jwt from "jsonwebtoken";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   //* api 순서도
@@ -45,10 +46,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     Data.user.write([...users, newUser]);
 
+    // 6.추가된 유저의 정보와 token을 전달합니다.
+    const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET!);
+    //1. const token = jwt.sign(String(newUser.id), "my_private-secret";
+
     res.statusCode = 405;
 
     return res.end();
   }
 };
-
-//남은 건 , 6.추가된 유저의 정보와 token을 전달합니다.

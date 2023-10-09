@@ -1,6 +1,6 @@
-# 회원가입과 로그인 6(회원가입 api) 비밀번호 암호화 하기
-1. yarn add bcryptjs 라이브러리 설치 후 암호화
-2. yarn add @types/bcryptjs -D 의존성 설치하여 타입스크립트에도 사용하기
-3. next-bnb\pages\api\auth\signup.ts 파일에 암호화 추가
-4. next-bnb\public\static\image\user\default_user_profile_image.jpg 프로필 이미지 추가
-5. next-bnb\pages\api\auth\signup.ts 파일 유저정보추가
+# 회원가입과 로그인 7(회원가입 api) jwt 토큰 생성하기
+1. yarn add jsonwebtoken 서버와 클라이언트 간 통신할 수있는 사용자 인증 토큰
+2. yarn add @types/jsonwebtoken
+3. next-bnb\pages\api\auth\signup.ts  토큰생성
+4. next-bnb\.env.local 보안으로 인해 환경변수에  저장
+5. next-bnb\pages\api\auth\signup.ts  토큰생성수정
