@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Data from "../../../lib/data";
+import bcrypt from "bcryptjs";
+import { StoredUserType } from "../../../types/user";
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   //* api 순서도
   //1.api methof post 인지확인
@@ -18,10 +21,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.statusCode = 409;
       res.send("이미 가입된 이메일 입니다.");
     }
+
+    // 4.패스워드 암호화
+    const hashedPassword = bcrypt.hashSync(password, 8);
+
+    // 5. 유저 정보를 추가
+    const users = Data.user.getList();
+    let userId;
+    if (users.length === 0) {
+      userId = 1;
+    } else {
+      userId = users[users.length - 1].id + 1;
+    }
+    const newUser: StoredUserType = {
+      id: userId,
+      email,
+      firstname,
+      lastname,
+      password: hashedPassword,
+      birthday,
+      profileImage: "/static/image/user/default_user_profile_image.jpg"
+    };
+
+    Data.user.write([...users, newUser]);
+
     res.statusCode = 405;
 
     return res.end();
   }
 };
 
-//남은 건 , 4.패스워드 암호화, 5. 유저 정보를 추가, 6.추가된 유저의 정보와 token을 전달합니다.
+//남은 건 , 6.추가된 유저의 정보와 token을 전달합니다.
