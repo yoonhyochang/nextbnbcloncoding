@@ -14,13 +14,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.statusCode = 400;
       return res.send("필수 데이터가 없습니다.");
     }
-    // return res.send("필수 데이터가 없습니다.");
 
     //3.email 중복확인
     const userExist = Data.user.exist({ email });
     if (userExist) {
       res.statusCode = 409;
-      res.send("이미 가입된 이메일 입니다.");
+      return res.send("이미 가입된 이메일 입니다.");
     }
 
     // 4.패스워드 암호화
@@ -46,12 +45,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     Data.user.write([...users, newUser]);
 
-    // 6.추가된 유저의 정보와 token을 전달합니다.
     const token = jwt.sign(String(newUser.id), process.env.JWT_SECRET!);
-    //1. const token = jwt.sign(String(newUser.id), "my_private-secret";
+    res.setHeader(
+      "Set-Cookie",
+      `access_token=${token}; path=/; expires=${new Date(
+        Date.now() + 60 * 60 * 24 * 1000 * 3 //3일
+      )}; httponly`
+    );
 
-    res.statusCode = 405;
-
-    return res.end();
+    res.statusCode = 200;
+    return res.end(JSON.stringify(newUser));
   }
+  res.statusCode = 405;
+  return res.end();
 };

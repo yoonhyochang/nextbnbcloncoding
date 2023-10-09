@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.3",
+    "axios": "^1.5.1",
     "babel-plugin-styled-components": "^2.1.4",
     "bcryptjs": "^2.4.3",
     "jsonwebtoken": "^9.0.2",
